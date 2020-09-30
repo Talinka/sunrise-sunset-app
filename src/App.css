@@ -1,3 +1,33 @@
+body {
+  margin: 2rem;
+}
+
+header {
+  text-align: center;
+  margin: 2rem auto;
+}
+
+.row {
+  margin: 5%;
+  align-items: center;
+}
+
+input {
+  margin-bottom: 1.5rem;
+}
+
+.search-button {
+  width: 100%;
+}
+
+.info-container {
+  border-top: solid 1.5px black;
+}
+
+.info {
+  font-size: clamp(100%, 1rem + 1vw, 24px);
+}
+
 .App {
   text-align: center;
 }
