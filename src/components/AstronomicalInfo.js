@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import sunrise from '../assets/icons/sunrise.svg';
 import sunset from '../assets/icons/sunset.svg';
 
-const SunsetInfo = ({ sunsetTime, sunriseTime }) => {
+const AstronomicalInfo = ({ sunsetTime, sunriseTime }) => {
   return (
     <Container className="info-container">
       <Row>
@@ -27,4 +27,4 @@ const SunsetInfo = ({ sunsetTime, sunriseTime }) => {
   );
 };
 
-export default SunsetInfo;
+export default AstronomicalInfo;
