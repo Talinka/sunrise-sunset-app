@@ -1,29 +1,39 @@
-import React, { useState, createRef } from 'react';
+import React, { useState } from 'react';
 import { Row, Col, Button, Form } from 'react-bootstrap';
 import { Typeahead } from 'react-bootstrap-typeahead';
+import geoData from '../assets/countries';
 
-const Search = ({ data, onSearch }) => {
-  const [selected, setSelected] = useState([]);
-  const countryInput = createRef();
+const Search = ({ onSearch }) => {
+  const [selectedCountries, setSelectedCountries] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
-
-  const isDataReady = data !== null;
-  const countryNames = isDataReady ? Object.keys(data) : [];
+  const [isValidDate, setValidDate] = useState(false);
+  const [isValidCountry, setValidCountry] = useState(false);
 
   const searchHandler = (e) => {
     e.preventDefault();
-    const country = countryInput.current.getInput().value;
-    const date = selectedDate ? new Date(selectedDate) : null;
-    onSearch(country, date);
+    console.log("date", selectedDate, selectedDate !== null, Boolean(selectedDate), selectedCountries, selectedCountries.length === 1);
+    setValidCountry(selectedCountries.length === 1);
+    setValidDate(Boolean(selectedDate));
+    if (!isValidDate || !isValidCountry) {
+      console.log('validation error');
+      return;
+    }
+    const country = selectedCountries[0];
+    const date = new Date(selectedDate);
+    onSearch(country.lat, country.lng, date);
   }
 
   const changeDateHandler = ({ target }) => {
-    console.log("target", target.value);
     setSelectedDate(target.value);
   }
 
+  const setSelectedCountryHandler = (data) => {
+    setSelectedCountries(data);
+  }
+
+  console.log("data country", isValidDate, isValidCountry);
   return (
-    <Form>
+    <Form noValidate onSubmit={searchHandler}>
       <Row className="justify-content-between">
         <Col sm={5} xs={12}>
           <Form.Label>
@@ -34,17 +44,25 @@ const Search = ({ data, onSearch }) => {
             type="date"
             value={selectedDate}
             onChange={changeDateHandler}
+            isValid={isValidDate}
           />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid date
+          </Form.Control.Feedback>
         </Col>
         <Col sm={5}>
           <Form.Label>Country:</Form.Label>
           <Typeahead
             id="country-typeahead"
-            ref={countryInput}
-            onChange={setSelected}
-            selected={selected}
-            options={countryNames}
+            onChange={setSelectedCountryHandler}
+            selected={selectedCountries}
+            labelKey={option => `${option.name}`}
+            options={geoData}
+            isValid={isValidCountry}
           />
+          <Form.Control.Feedback type="invalid">
+            Please choose a country
+          </Form.Control.Feedback>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -52,8 +70,6 @@ const Search = ({ data, onSearch }) => {
           <Button
             className="search-button"
             type="submit"
-            onClick={searchHandler}
-            disabled={!isDataReady}
           >
             Show
           </Button>
