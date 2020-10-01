@@ -1,9 +1,18 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import sunrise from '../assets/icons/sunrise.svg';
 import sunset from '../assets/icons/sunset.svg';
 
-const AstronomicalInfo = ({ sunsetTime, sunriseTime }) => {
+const AstronomicalInfo = ({ isLoading, sunsetTime, sunriseTime }) => {
+
+  if (isLoading) {
+    return (
+      <Row>
+        <Col xs="auto"><Spinner animation="border" /></Col>
+      </Row>
+    );
+  };
+
   return (
     <Container className="info-container">
       <Row>
