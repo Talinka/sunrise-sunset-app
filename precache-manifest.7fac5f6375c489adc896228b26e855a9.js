@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f55a060fe6ddeca62fbc90524b1158dd",
+    "revision": "a1df1c7fc6f75a0a6aea1404b0a9ca73",
     "url": "/sunrise-sunset-app/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/sunrise-sunset-app/static/css/2.fd554b7d.chunk.css"
   },
   {
-    "revision": "629021e720c96b4d8569",
+    "revision": "4de2dee3b41d9ad882bd",
     "url": "/sunrise-sunset-app/static/css/main.c5c98dc9.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/sunrise-sunset-app/static/js/2.ce2ceeba.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "629021e720c96b4d8569",
-    "url": "/sunrise-sunset-app/static/js/main.39598276.chunk.js"
+    "revision": "4de2dee3b41d9ad882bd",
+    "url": "/sunrise-sunset-app/static/js/main.b3967ddf.chunk.js"
   },
   {
     "revision": "187e98fa226eaaefdd53",
