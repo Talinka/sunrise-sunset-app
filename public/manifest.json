@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Sunrise and sunset App",
+  "name": "Get info about sunrise and sunset times",
   "icons": [
     {
       "src": "favicon.ico",

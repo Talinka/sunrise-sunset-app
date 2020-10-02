@@ -13,6 +13,7 @@ export default async (lat, lng, dateTime) => {
       sunrise: results.sunrise,
     };
   } else {
-    throw new Error(`Failed to get astronomical data`);
+    console.log(response.status)
+    throw new Error(`Failed to get astronomical data. ${response.status}`);
   }
 };
