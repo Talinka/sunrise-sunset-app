@@ -1,19 +1,32 @@
-import { getAstronomicalInfoUrl } from './utils';
+const ASTRONOMICAL_SERVICE = 'https://api.sunrise-sunset.org';
 
-export default async (lat, lng, dateTime) => {
-  const date = dateTime.toLocaleDateString();
-  const response = await fetch(getAstronomicalInfoUrl(lat, lng, date));
+const getAstronomicalInfoUrl = (lat, lng, date = 'today') => (
+  `${ASTRONOMICAL_SERVICE}/json?lat=${lat}&lng=${lng}&date=${date}`
+);
 
-  if (response.ok) {
+export default async (lat, lng, date) => {
+  const formattedDate = getFormattedDateString(date);
+  try {
+    const response = await fetch(getAstronomicalInfoUrl(lat, lng, formattedDate));
     const json = await response.json();
-    const { results } = json;
+    const { results, status } = json;
 
-    return {
-      sunset: results.sunset,
-      sunrise: results.sunrise,
-    };
-  } else {
-    console.log(response.status)
-    throw new Error(`Failed to get astronomical data. ${response.status}`);
+    if (response.ok) {
+      return {
+        sunset: results.sunset,
+        sunrise: results.sunrise,
+      };
+    } else {
+      throw new Error(`Failed to get astronomical data. ${status}`);
+    }
+  } catch (error) {
+    throw new Error(`Server problems. ${error.message}`);
   }
+};
+
+const getFormattedDateString = (date) => {
+  const month = `${date.getMonth() + 1}`.padStart(2,0);
+  const day = `${date.getDate()}`.padStart(2,0);
+
+  return `${date.getFullYear()}-${month}-${day}`;
 };
